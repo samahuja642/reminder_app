@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  {% if not form.validate_on_submit() %}
+  <form method="POST" action="">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.email.label(class="form-control-label") }}
+      {{ form.email(class="form-control") }}
+      {% if form.email.errors %}
+      {% for error in form.email.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.username.label(class="form-control-label") }}
+      {{ form.username(class="form-control") }}
+      {% if form.username.errors %}
+      {% for error in form.username.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.phone_number.label(class="form-control-label") }}
+      {{ form.phone_number(class="form-control") }}
+      {% if form.phone_number.errors %}
+      {% for error in form.phone_number.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.password.label(class="form-control-label") }}
+      {{ form.password(class="form-control") }}
+      {% if form.password.errors %}
+      {% for error in form.password.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="form-group">
+      {{ form.confirm_password.label(class="form-control-label") }}
+      {{ form.confirm_password(class="form-control") }}
+      {% if form.confirm_password.errors %}
+      {% for error in form.confirm_password.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    {{ form.submit(class="mt-2 btn btn-outline-info") }}
+  </form>
+  {% endif %}
+  {% if form.validate_on_submit() %}
+    <form method="POST" action="">
+    {{ form2.csrf_token }}
+    <div class="form-group">
+      {{ form2.otp.label(class="form-control-label") }}
+      {{ form2.otp(class="form-control") }}
+      {% if form2.otp.errors %}
+      {% for error in form2.otp.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    {{ form2.submit(class="btn btn-outline-info") }}
+  </form>
+   {% endif %}
+  <small class="text-muted pt-5">
+    Already Have an Account ? <a href="{{ url_for('login') }}" class="ml-2" >Login Here</a>
+  </small>
+</div>
+{% endblock content %}

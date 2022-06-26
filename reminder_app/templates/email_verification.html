@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <form method="POST" action="">
+    {{ form.csrf_token }}
+    <div class="form-group">
+      {{ form.otp.label(class="form-control-label") }}
+      {{ form.otp(class="form-control") }}
+      {% if form.otp.errors %}
+      {% for error in form.otp.errors %}
+      <span class="danger">{{ error }}</span>
+      {% endfor %}
+      {% endif %}
+    </div>
+    {{ form.submit(class="btn btn-outline-info") }}
+  </form>
+</div>
+{% endblock content %}

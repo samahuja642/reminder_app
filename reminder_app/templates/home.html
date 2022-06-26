@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <h2>Reminders</h2>
+  {% if not reminders %}
+  <div class="alert alert-warning" role="alert">No Reminders Yet!</div>
+  {% else %}
+  <div class="container">
+    <div class="row row-cols-auto">
+      {% for reminder in reminders %}
+      <div class="col">
+	<div class="card mb-3" style="width: 18rem;">
+	  <div class="card-body">
+	    <h5 class="card-title">{{reminder.title}}</h5>
+	    <h6 class="card-subtitle mb-2 text-muted">{{reminder.date}}  {{reminder.time}}</h6>
+	    <p class="card-text">{{reminder.message}}</p>
+	  </div>
+	</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}
