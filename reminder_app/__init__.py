@@ -7,7 +7,7 @@ from flask_session import Session
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '46b5ed512536f1ea60f45e5a01a6512a'
+app.config['SECRET_KEY'] = os.environ.get('sec_key')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['MAIL_SERVER'] = 'smtp.googlemail.com'
 app.config['MAIL_PORT'] = 587
