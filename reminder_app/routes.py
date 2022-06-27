@@ -8,18 +8,17 @@ import random
 from flask_mail import Message
 import os,time
 
+@app.route('/home',methods=['POST','GET'])
 @login_required
-@app.route('/home/<string:username>',methods=['POST','GET'])
-def home(username):
-    if current_user.username == username:
-        reminders = Reminder.query.filter_by(user_id=current_user.id)
-        return render_template('home.html',reminders=reminders)
-    else:
-        return abort(403)
+def home():
+    reminders = Reminder.query.filter_by(user_id=current_user.id)
+    return render_template('home.html',reminders=reminders)
 
-@login_required
 @app.route('/<string:username>/new_reminder',methods=['POST','GET'])
+@login_required
 def new_reminder(username):
+    if username!=current_user.username:
+        return abort(403)
     form = NewReminder()
     if form.validate_on_submit():
         reminder = Reminder(title=form.title.data,message=form.message.data,time=form.time.data,date=form.date.data,author=current_user)

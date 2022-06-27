@@ -16,8 +16,9 @@ def mailer():
                 subject = _.title
                 msg = Message(sender=os.environ.get('email_address'),recipients=[user.email],body=message,subject=subject)
                 conn.send(msg)
-            db.session.delete(_)
-            db.session.commit()    
+            if _:
+                db.session.delete(_)
+                db.session.commit()    
 if __name__=='__main__':
     scheduler.add_job(id="mailer",func=mailer,trigger='interval',seconds=60)
     scheduler.start()
