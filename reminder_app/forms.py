@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField,SubmitField,TextAreaField,DateField,TimeField,IntegerField
 from wtforms.validators import Email,DataRequired,Length,EqualTo,ValidationError
 from reminder_app.models import User
+import datetime
 
 class LoginForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(),Email()])
@@ -33,6 +34,14 @@ class NewReminder(FlaskForm):
     date = DateField('Date',validators=[DataRequired()], format='%Y-%m-%d')
     time = TimeField('Time',validators=[DataRequired()],format='%H:%M')
     submit = SubmitField('Set Reminder')
+
+    def validate_date(self,date):
+        if datetime.datetime.now().date() > date.data:
+            raise ValidationError("You can't set date back in time")
+    def validate_time(self,time):
+        if datetime.datetime.now().date() == self.date.data:
+            if (datetime.datetime.now() + datetime.timedelta(minutes=30)).time() > time.data:
+                raise ValidationError("You can set atleast after 30 min from now")
 
 class EmailVerification(FlaskForm):
     otp = IntegerField('OTP :',validators=[DataRequired()])

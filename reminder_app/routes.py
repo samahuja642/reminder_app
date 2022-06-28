@@ -14,6 +14,11 @@ def home():
     reminders = Reminder.query.filter_by(user_id=current_user.id)
     return render_template('home.html',reminders=reminders)
 
+@app.route('/')
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/<string:username>/new_reminder',methods=['POST','GET'])
 @login_required
 def new_reminder(username):
