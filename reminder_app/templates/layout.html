@@ -30,11 +30,11 @@
               <a class="nav-link" href="/{{current_user.username}}/new_reminder">Create Reminder</a>
             </li>
 	  </ul>
-	  <div class="dropstart d-flex">
+	  <div class="dropdown d-flex">
 	    <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
 	      <img src="{{ url_for('static',filename='profile_pics/'+current_user.image_file) }}" class="rounded account-img" alt="profile">
 	    </button>
-	    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+	    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton">
 	      <li><a class="dropdown-item active" href="/settings">Settings</a></li>
 	      <li><a class="dropdown-item" href="{{ url_for('logout') }}">Log Out</a></li>
 	    </ul>

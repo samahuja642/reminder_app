@@ -4,3 +4,6 @@ reminder_app/*~
 reminder_app/__pycache__
 reminder_app/site.db
 reminder_app/static/profile_pics/*
+reminder_app/static/profile_pics/*
+!reminder_app/static/profile_pics/info.md
+!reminder_app/static/images/info.md
